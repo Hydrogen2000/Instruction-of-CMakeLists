@@ -42,7 +42,31 @@ find_package(Boost REQUIRED COMPONENTS
 )
 ```
 
-用于查找C++的Boost库的组件功能包。`Boost`是一个C++库。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`后面跟需要的功能包名称。
+用于查找C++的Boost库的组件功能包。`Boost`是C++库。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`后面跟需要的功能包名称。
 
 【本句查找了system功能包，它通常用于系统级别的操作，如线程管理。】
+
+```
+# catkin_python_setup()
+```
+
+用于配置Python代码，并生成相应的setup.py文件，使得它们可以在ROS中正确地使用。
+
+【一般保持注释】
+
+```
+# add_message_files(FILES
+#   ${MESSAGE}.msg
+# )
+# add_service_files(FILES
+#   ${SERVICE}.srv
+# )
+# add_action_files(FILES
+#   ${ACTION}.action
+# )
+```
+
+用于添加消息文件。`FILES`将引用当前功能包msg目录中的.msg文件，生成一个消息的.h头文件。
+
+【需要时解注，srv和action用法与此相同】
 
