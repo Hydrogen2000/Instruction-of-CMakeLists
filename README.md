@@ -32,7 +32,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 ```
 
-用于查找ROS的catkin构建系统的组件功能包。`catkin`是ROS的构建系统，基于CMake，用于构建和管理ROS功能包。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`后面跟需要的功能包名称，这些功能包是ROS中已经构建好的。
+用于查找ROS的catkin构建系统的组件功能包。`catkin`是ROS的构建系统，基于CMake，用于构建和管理ROS功能包。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`关键字后面跟需要的功能包名称，这些功能包是ROS中已经构建好的。
 
 【本句查找了roscpp、std_msgs功能包】
 
@@ -42,7 +42,7 @@ find_package(Boost REQUIRED COMPONENTS
 )
 ```
 
-用于查找C++的Boost库的组件功能包。`Boost`是C++库。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`后面跟需要的功能包名称。
+用于查找C++的Boost库的组件功能包。`Boost`是C++库。`REQUIRED`关键字表示是必须找到的，否则CMake将停止处理并报错。`COMPONENTS`关键字后面跟需要的功能包名称。
 
 【本句查找了system功能包，它通常用于系统级别的操作，如线程管理。】
 
@@ -56,13 +56,13 @@ find_package(Boost REQUIRED COMPONENTS
 
 ```
 # add_message_files(FILES
-#   ${MESSAGE}.msg
+#   ${Message}.msg
 # )
 # add_service_files(FILES
-#   ${SERVICE}.srv
+#   ${Service}.srv
 # )
 # add_action_files(FILES
-#   ${ACTION}.action
+#   ${Action}.action
 # )
 ```
 
@@ -70,3 +70,31 @@ find_package(Boost REQUIRED COMPONENTS
 
 【需要时解注，srv和action用法与此相同】
 
+```
+generate_messages(DEPENDENCIES
+  std_msgs
+)
+```
+
+用于指示为当前功能包中依赖的消息、服务和动作生成对应的源代码。`DEPENDENCIES`关键字后面跟所依赖的功能包列表，catkin会自动查找功能包中.msg、.srv、.action文件。
+
+【本句指示依赖std_msgs消息】
+
+```
+# generate_dynamic_reconfigure_options(
+#   cfg/${DynReconf}.cfg
+# )
+```
+
+用于配置ROS动态参数。
+
+【一般保持注释】
+
+```
+catkin_package(
+#  INCLUDE_DIRS include
+#  LIBRARIES hello_world
+#  CATKIN_DEPENDS roscpp std_msgs
+#  DEPENDS system_lib
+)
+```
